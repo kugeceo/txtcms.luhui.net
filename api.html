@@ -6,7 +6,7 @@
 	<p>1，该外部地址支持本阅读器的跨域请求。</p>
 	<p>2，该外部地址支持 https 协议。</p>
 	<h3>地址格式</h3>
-	<p>https://{0}.net?url=&amp;params=</p>
+	<p>https://txtcms.{0}.net?url=&amp;params=</p>
 	<table style="padding: 10px">
 		<tbody>
 			<tr><th>参数</th><th>说明</th></tr>
@@ -48,7 +48,7 @@
 	<p>zip 文件加载完毕后，如果存在多个内部文件，则打开其中一个之后，再通过返回主页，点击 + 按钮打开 ZIP 文件则可以选择打开其他文件。</p>
 	<h3>Nginx 跨域处理（示例）</h3>
 	<p><pre>
-if ($http_origin ~ "{0}.net$") {
+if ($http_origin ~ "txtcms.{0}.net$") {
 	add_header "Access-Control-Allow-Origin" $http_origin;
 	add_header 'X-Frame-Options' "ALLOW FROM $http_origin";
 	add_header 'Access-Control-Allow-Headers' "dfheader";
