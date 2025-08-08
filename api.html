@@ -1,12 +1,12 @@
 
 <div class='apidiv' style="color:#fff;margin:10px 10px 20px">
-	<h2>接入狸兔阅读器</h2>
+	<h2>接入鲁虺阅读器</h2>
 	<p>通过外部地址打开 TXT / LITU / ZIP 文件。</p>
 	<h3>前置条件</h3>
 	<p>1，该外部地址支持本阅读器的跨域请求。</p>
 	<p>2，该外部地址支持 https 协议。</p>
 	<h3>地址格式</h3>
-	<p>https://{0}.com?url=&amp;params=</p>
+	<p>https://{0}.net?url=&amp;params=</p>
 	<table style="padding: 10px">
 		<tbody>
 			<tr><th>参数</th><th>说明</th></tr>
@@ -29,8 +29,8 @@
 		</tbody>
 	</table>
 	<h3>响应头</h3>
-	<p>响应头 lituydq 可以覆盖 params 部分参数，优先级更高，值为 JSON 字符串进行 base64 编码</p>
-	<p>需要设置响应头 Access-Control-Expose-Headers: lituydq</p>
+	<p>响应头 luhui 可以覆盖 params 部分参数，优先级更高，值为 JSON 字符串进行 base64 编码</p>
+	<p>需要设置响应头 Access-Control-Expose-Headers: luhui</p>
 	<table style="padding: 10px">
 		<tbody>
 			<tr><th>参数</th><th>默认值</th><th>说明</th></tr>
@@ -42,18 +42,18 @@
 	</table>
 	<h3>文件名称与文件类型</h3>
 	<p>文件名称解析顺序：</p>
-	<ol><li>响应头 lituydq 中的 filename </li><li>params 中的 filename </li><li>响应头 Content-Disposition 中的文件名 </li><li>url 地址最后一个 / 之后的字符串</li></ol>
+	<ol><li>响应头 luhui 中的 filename </li><li>params 中的 filename </li><li>响应头 Content-Disposition 中的文件名 </li><li>url 地址最后一个 / 之后的字符串</li></ol>
 	<p>文件名称后缀决定文件类型，只包括 TXT / LITU / ZIP 三种，不区分大小写。</p>
 	<h3>ZIP 文件</h3>
 	<p>zip 文件加载完毕后，如果存在多个内部文件，则打开其中一个之后，再通过返回主页，点击 + 按钮打开 ZIP 文件则可以选择打开其他文件。</p>
 	<h3>Nginx 跨域处理（示例）</h3>
 	<p><pre>
-if ($http_origin ~ "{0}.com$") {
+if ($http_origin ~ "{0}.net$") {
 	add_header "Access-Control-Allow-Origin" $http_origin;
 	add_header 'X-Frame-Options' "ALLOW FROM $http_origin";
 	add_header 'Access-Control-Allow-Headers' "dfheader";
 	add_header 'Access-Control-Allow-Credentials' 'true';
-	add_header 'Access-Control-Expose-Headers' 'Content-Disposition, filename, lituydq';
+	add_header 'Access-Control-Expose-Headers' 'Content-Disposition, filename, luhui';
 	add_header 'Vary' 'Origin';
 }
 	</pre></p>
