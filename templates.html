@@ -1,0 +1,524 @@
+
+<!-- 目录区 -->
+<div id="chapter_list">
+    <div>
+        <div class='top'><span class='bookinfo'></span><span class="back">返回</button></span></div>
+    </div>
+</div>
+<!-- 书签区 -->
+<div id="bookmark_list">
+    <div>
+        <div class='top'>
+            <span class='markinfo'></span>
+            <span class="back">返回</span>
+        </div>
+    </div>
+</div>
+<!-- 搜索结果区 -->
+<div id="search_list">
+    <div>
+        <div class='top'>
+            <span class='result'></span>
+            <span class="back">返回</span><span class="reset">重搜</span>
+        </div>
+    </div>
+</div>
+<div id="root" class="container" style="display:none;">
+    <!--<div class="m-article-action">
+        <div class="article-action-mid" id="action_mid"></div>
+    </div> -->
+    
+    <!-- 头部导航 -->
+    <div style="margin:0 auto;">
+        <div id="top_nav" class="top-nav" style="display: none">
+            <div class="icon-back" onclick="location=location" title="退出阅读"></div>
+            <div class="nav-title">书名</div>
+        </div>
+    </div>
+    
+    <!-- 内容区 -->
+    <div style="margin:0 auto;z-index: 10;position: relative2;">
+        <!-- 标题区 -->
+        <div id="fiction_chapter_title"><span class="title" style="overflow: hidden;"></span><span class="jindu">0.00%</span></div>
+        <canvas id="canvas" style="margin-top: 0px;margin-bottom: -30px;position: relative;">不支持</canvas>
+        <!-- 底部区 -->
+        <div id="fiction_chapter_bottom"><span class="ctjindu"></span><span class="encoding"></span></div>
+    </div>
+    
+    <!-- 底部导航 -->
+    <div style="margin:0 auto;">
+        <div class="bottom-nav-bk bottom-nav" style="display: none;"></div>
+        <div class="bottom-nav" id="bottom_nav" style="display: none;"></div>
+        <!-- 底部面板 -->
+        <div class="schedule-panel-bk schedule-panel" style="display: none;"></div>
+        <div id="schedule-container" class="schedule-panel" style="display: none;">
+            <div style="bottom:120px;width: 100px;text-align: left;position: absolute;">
+                <button id="banthispagereplaceBtn" class="menubtn floatmenu" style="display: none;">本页原文</button>
+                <button id="yhParagraphBtn" class="menubtn floatmenu" style="display: none;">排版优化</button>
+                <button id="rePageBtn" class="menubtn floatmenu" style="display: none;">重新分页</button>
+            </div>
+            <div id="btitle" style="margin-top:-10px;text-align:center;overflow: hidden; text-overflow: ellipsis; word-break: break-all; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;"></div>
+            <div class="child-mod">
+                <p class="schedule-p" style="margin-top: 10px;"><span id="schedule-bar" style="height: 22px; line-height: 22px; border-radius: 4px; top: -16px; padding: 2px 0; left: 29.05px; background-color: #fefeff;"></span></p>
+            </div>
+            <div class="child-mod" style="clear:both">
+                <button id="prev_btn" class="menubtn">上一章</button>
+                <button id="index_btn" class="menubtn">主页</button>
+                <button id="next_btn" class="menubtn">下一章</button>
+            </div>
+        </div>
+        <div class="nav-panel-bk nav-panel" style="display: none;"></div>
+        <div id="font-container" class="nav-panel" style="display: none;">
+            <!-- 字体 -->
+            <div class="child-mod2">
+                <span>颜色</span><div class="fbk-container"></div>
+                <span>背景</span><div class="bk-container"></div>
+                <span>描边</span><div class="mfbk-container"></div>
+                <span style="display:none">场外</span><div class="cwbk-container" style="display:none"></div>
+            </div>
+            <div class="child-mod2">
+                <span>描宽</span>
+                <button id="large-mw" class="font-size-btn">+</button>
+                <button id="small-mw" class="font-size-btn">-</button>
+                <span id="mwsizespan" class="fsizespan" name="initMwSize">3</span>
+            </div>
+            <div class="child-mod2">
+                <span>大小</span>
+                <button id="large-font" class="font-size-btn">+</button>
+                <button id="small-font" class="font-size-btn">-</button>
+                <span id="fontsizespan" class="fsizespan" name="initFontSize">20</span>
+            </div>
+            <!--<div class="child-mod">
+                <span>粗细</span>
+                <button id="large-weight" class="font-size-btn">+</button>
+                <button id="small-weight" class="font-size-btn">-</button>
+                <span id="fontweightspan">400</span>
+            </div>-->
+            <div class="child-mod2">
+                <span>字距</span>
+                <button id="large-cd" class="font-size-btn">+</button>
+                <button id="small-cd" class="font-size-btn">-</button>
+                <span id="cdsizespan" class="fsizespan" name="initCharDistance">0</span>
+            </div>
+            <div class="child-mod2">
+                <span>行距</span>
+                <button id="large-hd" class="font-size-btn">+</button>
+                <button id="small-hd" class="font-size-btn">-</button>
+                <span id="hdsizespan" class="fsizespan" name="initLineDistance">20</span>
+            </div>
+            <div class="child-mod2">
+                <span>段距</span>
+                <button id="large-dd" class="font-size-btn">+</button>
+                <button id="small-dd" class="font-size-btn">-</button>
+                <span id="ddsizespan" class="fsizespan" name="initParagraphDistance">40</span>
+            </div>
+            <div class="child-mod2">
+                <span>排版</span>
+                <div class="pb-container">
+                    <input name="directmodel" type="radio" value="1"> <span class="fontspan" link="directmodel" value="1">横排</span>&nbsp;&nbsp;<input name="directmodel" type="radio" value="2"> <span class="fontspan" link="directmodel" value="2">竖排</span>
+                </div>
+                <!--<div style="display: inline-block;line-height: 30px;">
+                    <span style="padding:0 5px 0 0">左右</span>
+                    <input name="leftright" type="radio" value="1"> 左&nbsp;&nbsp;<input name="leftright" type="radio" value="2"> 右&nbsp;&nbsp;
+                    <input name="leftright" type="radio" value="3"> 随机&nbsp;&nbsp;
+                </div>-->
+                <div style="display: inline-block;line-height: 30px;">
+                    <input name="indent" type="checkbox"> <span class="fontspan" link="indent">缩进</span>&nbsp;&nbsp;<input name="waveline" type="checkbox"> <span class="fontspan" link="waveline">波浪</span>
+                </div>
+            </div>
+            <div class="child-mod2">
+                <span>文字</span>
+                <div class="pb-container">
+                    <input name="bold" type="checkbox"> <span class="fontspan" link="bold">粗体</span>&nbsp;&nbsp;<input name="italic" type="checkbox"> <span class="fontspan" link="italic">斜体</span>&nbsp;&nbsp;<input name="equalWidth" type="checkbox"> <span class="fontspan" link="equalWidth">等宽</span>&nbsp;&nbsp;<input name="shadow" type="checkbox"> <span class="fontspan" link="shadow">阴影</span>
+                </div>
+                <div style="display: inline-block;line-height: 30px;">
+                    <span class="spcolor">颜色</span>
+                    <input name="fontcolorrandom" type="radio" value=1> <span class="fontspan" link="fontcolorrandom" value=1>原始</span>&nbsp;
+                    <input name="fontcolorrandom" type="radio" value=2> <span class="fontspan" link="fontcolorrandom" value=2>每页随机</span>&nbsp;
+                    <input name="fontcolorrandom" type="radio" value=3> <span class="fontspan" link="fontcolorrandom" value=3>每字随机</span>
+                </div>
+            </div>
+            <div class="child-mod2">
+                <span>线框</span>
+                <div class="pb-container">
+                    <input name="yuankuang" type="checkbox"> <span class="fontspan" link="yuankuang">圆框</span>&nbsp;&nbsp;<input name="fangkuang" type="checkbox"> <span class="fontspan" link="fangkuang">方框</span>&nbsp;&nbsp;<input name="tianzige" type="checkbox"> <span class="fontspan" link="tianzige">田框</span>&nbsp;&nbsp;<input name="mizige" type="checkbox"> <span class="fontspan" link="mizige">米框</span>&nbsp;&nbsp;<input name="underline" type="checkbox"> <span class="fontspan" link="underline">下划线</span>
+                </div>
+                <div style="display: inline-block;line-height: 30px;">
+                    <span class="spcolor">颜色</span>
+                    <input name="xkrandomcolor" type="checkbox"> <span class="fontspan" link="xkrandomcolor">随机</span>&nbsp;&nbsp;
+                    <div class="xkbk-container"></div>
+                </div>
+                <div class="pb-container">
+                    <input name="xkskipbd" type="checkbox"> <span class="fontspan" link="xkskipbd">忽略标点</span>
+                </div>
+            </div>
+            <div class="child-mod2">
+                <span>背字</span>
+                <div class="pb-container">
+                    <input name="undertext" type="checkbox"> <span class="fontspan" link="undertext">开启</span>
+                </div>
+                <span style="padding:0 5px 0 0">渲染</span>
+                <div class="pb-container">
+                    <input name="undertexttype" type="radio" value="1"> <span class="fontspan" link="undertexttype" value="1">全屏</span>&nbsp;&nbsp;<input name="undertexttype" type="radio" value="2"> <span class="fontspan" link="undertexttype" value="2">补空</span>
+                </div>
+                <div style="display: inline-block;line-height: 30px;">
+                    <span class="spcolor">颜色</span>
+                    <input name="undertextrandomcolor" type="checkbox"> <span class="fontspan" link="undertextrandomcolor">随机</span>&nbsp;&nbsp;
+                    <div class="bfbk-container"></div>
+                </div>
+            </div>
+            <div class="child-mod2">
+                <span>渐变</span>
+                <div class="pb-container">
+                    <input name="bggradient" type="checkbox"> <span class="fontspan" link="bggradient">背景</span>&nbsp;
+                    <input name="fontgradient" type="checkbox"> <span class="fontspan" link="fontgradient">文字</span>
+                </div>
+                <span style="padding:0 5px 0 0">方向</span>
+                <div class="pb-container">
+                    <input name="bggradientdirection" type="radio" value="1"> <span class="fontspan" link="bggradientdirection" value="1">上下</span>&nbsp;&nbsp;<input name="bggradientdirection" type="radio" value="2"> <span class="fontspan" link="bggradientdirection" value="2">左右</span>
+                </div>
+                <div style="display: inline-block;line-height: 30px;">
+                    <span class="spcolor">类型</span>
+                    <input name="bggradienttype" type="radio" value="1"> <span class="fontspan" link="bggradienttype" value="1">线性</span>&nbsp;&nbsp;
+                    <input name="bggradienttype" type="radio" value="2"> <span class="fontspan" link="bggradienttype" value="2">径向</span> <!--&nbsp;&nbsp;
+                    <input name="bggradienttype" type="radio" value="3"> <span class="fontspan" link="bggradienttype" value="3">锥形</span>-->
+                </div>
+                <div style="display: inline-block;line-height: 30px;">
+                    <span class="spcolor">渐变值</span>
+                    <span id="bggdvaluespan" class="fsizespan" name="bggradientvalue">20</span>
+                </div>
+            </div>
+            <div class="child-mod2">
+                <span>对话</span>
+                <div class="pb-container">
+                    <input name="talkingHighlight" type="checkbox"> <span class="fontspan" link="talkingHighlight">高亮</span>
+                </div>
+                <div style="display: inline-block;line-height: 30px;">
+                    <span class="spcolor" style="padding:0 5px 0 0">颜色</span>
+                    <input name="talkingrandomcolor" type="checkbox"> <span class="fontspan" link="talkingrandomcolor">随机</span>&nbsp;&nbsp;
+                    <div class="talkc-container"></div>
+                </div>
+                <div style="display: inline-block;line-height: 30px;">
+                    <button id="talkingMatchBtn" class="ftbtn">匹配设置</button>
+                </div>
+            </div>
+        </div>
+        <div class="bookmark-panel-bk bookmark-panel" style="display: none;"></div>
+        <div id="bookmark-container" class="bookmark-panel" style="display: none;">
+            <div class="child-mod" style="margin-top: 20px;">
+                <button id="addBookmark" class="menubtn">添加书签</button>
+                <button id="bookmarkList" class="menubtn" style="position: relative;">书签列表<span style="position: absolute; top: -3px; left: 1px; font-size: .9em; color: #faff2c;width: 100%; padding: 0;"></span></button>
+                <button id="clearBookmark" class="menubtn" style="margin-right: 10px;">清除书签</button>
+            </div>
+        </div>
+        <div class="search-panel-bk search-panel" style="display: none;"></div>
+        <div id="search-container" class="search-panel" style="display: none;">
+            <input name="searchfromhead" type="checkbox" class="stcheckbox" style="vertical-align: middle;"> <span class="fontspan" link="searchfromhead" style="vertical-align: text-top;cursor:pointer">从头定位</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name="searchtitle" type="checkbox" class="stcheckbox" style="vertical-align: middle;"> <span class="fontspan" link="searchtitle" style="vertical-align: text-top;cursor:pointer">只搜章节名</span>
+            <div class="child-mod" style="height:60%">
+                <input name="key" type="text" autocomplete="off" placeholder="输入关键字，回车搜索" style="margin-top: 10px;" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="flipbook"></div>
+<div class="prevPageBtn"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/></svg></div>
+<div class="nextPageBtn"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/></svg></div>
+<div id="indexMenu" style="position:absolute;top:10px;width:100%;color:#fff;">
+    <div style="max-width: 728px;margin: 0 auto;">
+        <svg id="settingbtn" style="float:right;margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+            <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+        </svg>
+        <svg id="openOtherFilebtn" style="float:left;margin-left: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+        </svg>
+    </div>
+</div>
+<input style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" id="replacefile" type="file" accept = "text/plain" onchange="importReplaceFile();" />
+<input type="file" id="zipfile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = "application/zip" />
+<input type="file" id="litufile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = ".litu" />
+<input type="file" id="conffile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = ".lituconf"  />
+<script id="talkingMatchConfTemplate" type="text/template">
+    <div id="talkingMatchConfdiv" style="margin:5px 10px;">
+        <p>选择用于识别对话的字符对</p>
+        <p class='talkingMatchList'></p>
+    </div>
+</script>
+<script id="openOtherFileTemplate" type="text/template">
+    <div style="margin:20px 10px 10px;">
+        <button class="openSharebtn">分享码加载文件</button>
+    </div>
+    <div style="margin:10px;">
+        <button class="selectTxtbtn">打开 TXT  文件</button>
+    </div>
+    <div style="margin:10px;">
+        <button class="selectLitubtn">打开 LITU 文件</button>
+    </div>
+    <div style="margin:10px;">
+        <button class="selectZipbtn">打开 ZIP  文件</button>
+    </div>
+    <div style="margin:10px 10px 20px;">
+        <button class="apibtn">外部接入文档</button>
+    </div>
+</script>
+<script id="settingTemplate" type="text/template">
+    <div id="settingdiv">
+        <div class='cfdiv'>
+            <span class='tlabel'>文件缓存：</span><input name="filecacheopen" type="checkbox"><span class='tlabel' style='margin-left:30px'>文件回收：</span><input name="recyclebin" type="checkbox">
+        </div>
+        <div class='cfdiv'>
+            <span class='tlabel'>翻页闪烁：</span><input name="flipbook" type="checkbox"><span class='tlabel' style='margin-left:30px'>翻页音效：</span><input name="pagingAudio" type="checkbox">
+        </div>
+        <div class='cfdiv'>
+            <span class='tlabel'>自动全屏：</span><input name="autofullscreen" type="checkbox">
+        </div>
+        <div class='cfdiv'>
+            <span class='tlabel'>文本替换：</span><input name="replaceopen" type="checkbox"><div style='display:none;margin: 0 0 0 30px;'><span class='tlabel'>翻页按钮：</span><input name="pagebtnshow" type="checkbox"></div>
+        </div>
+        <div class='cfdiv'>
+            <span class='tlabel'>繁简转换：</span><input name="fjmodel" type="radio" checked="checked" value="1"> 原始&nbsp;&nbsp;<input name="fjmodel" type="radio" value="2"> 简体&nbsp;&nbsp;<input name="fjmodel" type="radio" value="3"> 繁体
+        </div>
+        <div class='cfdiv'>
+            <span class='tlabel'>转换顺序：</span><input name="fjsort" type="radio" checked="checked" value="1"> 替换之前&nbsp;&nbsp;<input name="fjsort" type="radio" value="2"> 替换之后
+        </div>
+        <div>
+            <span class='tlabel' style="color:#67d2fd">菜单配置(是否显示、排序)</span>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>目　　录：</span><input name="menuname" ch="目录" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>排序&nbsp;&nbsp;</span><button class='adbtn msadd'>+</button><span class='menusort tlabel'>1</span><button class='adbtn msdec'>-</button>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>搜　　索：</span><input name="menuname" ch="搜索" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>排序&nbsp;&nbsp;</span><button class='adbtn msadd'>+</button><span class='menusort tlabel'>2</span><button class='adbtn msdec'>-</button>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>书　　签：</span><input name="menuname" ch="书签" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>排序&nbsp;&nbsp;</span><button class='adbtn msadd'>+</button><span class='menusort tlabel'>3</span><button class='adbtn msdec'>-</button>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>替　　换：</span><input name="menuname" ch="替换" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>排序&nbsp;&nbsp;</span><button class='adbtn msadd'>+</button><span class='menusort tlabel'>4</span><button class='adbtn msdec'>-</button>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>文　　本：</span><input name="menuname" ch="文本" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>排序&nbsp;&nbsp;</span><button class='adbtn msadd'>+</button><span class='menusort tlabel'>5</span><button class='adbtn msdec'>-</button>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>夜　　间：</span><input name="menuname" ch="夜间" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>排序&nbsp;&nbsp;</span><button class='adbtn msadd'>+</button><span class='menusort tlabel'>6</span><button class='adbtn msdec'>-</button>
+        </div>
+        <div>
+            <span class='tlabel' style="color:#67d2fd">快捷菜单(是否显示)</span>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>排版优化：</span><input class="qmenuname" vname="yhParagraphBtn"  type="checkbox">&nbsp;&nbsp;<span class='tlabel'>断行错误修正</span>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>重新分页：</span><input class="qmenuname" vname="rePageBtn" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>重新进行分页</span>
+        </div>
+        <div class='cfmenudiv'>
+            <span class='tlabel'>本页原文：</span><input class="qmenuname" vname="banthispagereplaceBtn" type="checkbox">&nbsp;&nbsp;<span class='tlabel'>还原非替换原文</span>
+        </div>
+    </div>
+</script>
+<script id="HisTableTemplate" type="text/template">
+    <table id='bookstable' class='historytable'>
+        <tr><th colspan='2' style='font-size:1.1em;border-bottom: 1px solid #555353;padding:10px 0'><span style='position: relative;'>阅读记录&nbsp;<span id='cachesize' style='font-size: .5em; color: #a9a9a9;position: absolute; top: 15px; left: 0; width: 95px;'></span></span></th><th style='border-bottom: 1px solid #555353;'></th><th colspan='4' style='text-align:right;border-bottom: 1px solid #555353;padding-right:0;padding-bottom: 5px;'><button class='hisbtn toggleHistoryBtn' title='显示' style='padding: 5px 5px 0;'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path class="eyeshow" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/><path class="eyeshow" d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/><path class="eyehide" style="display:none" d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755q-.247.248-.517.486z"/><path class="eyehide" style="display:none" d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829"/><path class="eyehide" style="display:none" d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z"/></svg></button></th></tr>
+        <tr class='histr'><td colspan='3' style='text-align:left;'><button class='historyOptBtn' title='操作' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z'/></svg></button>&nbsp;<button class='createTypeBtn hisbtn' title='创建分类' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='m.5 3 .04.87a2 2 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2m5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19q-.362.002-.683.12L1.5 2.98a1 1 0 0 1 1-.98z'/><path d='M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5'/>&nbsp;创建分类</svg></button>&nbsp;<button class='lockHisBtn hisbtn' title='设置一个密码将阅读记录上锁，隐藏后再显示需要输入密码' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1'/></svg></button>&nbsp;<button class='helpHisBtn hisbtn' title='说明' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14'/></svg></button></td><td colspan='2' style='text-align:right;padding-right:0;min-width2:102px;'><button class='hisSortBtn hisbtn' title='排序字段' style='height: 27px;font-size: 0.9em;padding-bottom:1px'>打开时间</button>&nbsp;<button class='hisSortUpDownBtn hisbtn' title='降序' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z'/>&nbsp;</svg></button></td></tr>
+        <tr class='hisopttr' style='display:none'><td colspan='3'><button class='checkallBtn hisbtn' title='全选' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/><path d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z'/>&nbsp;全选</svg></button>&nbsp;<button class='putToTypeBtn hisbtn' title='移入分类' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='m11.798 8.271-3.182 1.97c-.27.166-.616-.036-.616-.372V9.1s-2.571-.3-4 2.4c.571-4.8 3.143-4.8 4-4.8v-.769c0-.336.346-.538.616-.371l3.182 1.969c.27.166.27.576 0 .742'/><path d='m.5 3 .04.87a2 2 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2m.694 2.09A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09l-.636 7a1 1 0 0 1-.996.91H2.826a1 1 0 0 1-.995-.91zM6.172 2a1 1 0 0 1 .707.293L7.586 3H2.19q-.362.002-.683.12L1.5 2.98a1 1 0 0 1 1-.98z'/>&nbsp;移入分类</svg></button>&nbsp;<button class='zipHisBtn hisbtn' title='打包选中的可导出文件' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M5 7.5a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v.938l.4 1.599a1 1 0 0 1-.416 1.074l-.93.62a1 1 0 0 1-1.11 0l-.929-.62a1 1 0 0 1-.415-1.074L5 8.438zm2 0H6v.938a1 1 0 0 1-.03.243l-.4 1.598.93.62.929-.62-.4-1.598A1 1 0 0 1 7 8.438z'/><path d='M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1h-2v1h-1v1h1v1h-1v1h1v1H6V5H5V4h1V3H5V2h1V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z'/>打包导出</svg></button>&nbsp;<button class='clearCacheBtn hisbtn' title='删除选中的记录' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z'/><path d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z'/>清除记录</svg></button></td><td colspan='2' style='text-align:right;padding-right:0;min-width2:102px;'><button class='hisFileMergeBtn hisbtn' title='文件合并' style='padding: 5px 5px 0;display:none'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z'/>&nbsp;</svg></button>&nbsp;<button class='showHideFilesBtn hisbtn' title='隐藏文件' style='padding: 5px 5px 0;position: relative;display:none'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zm6.339-1.577A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z"/><path d="M11.854 10.146a.5.5 0 0 0-.707.708L12.293 12l-1.146 1.146a.5.5 0 0 0 .707.708L13 12.707l1.146 1.147a.5.5 0 0 0 .708-.708L13.707 12l1.147-1.146a.5.5 0 0 0-.707-.708L13 11.293z"/>&nbsp;</svg><span class='hidefilescount'></span></button>&nbsp;<button class='hisFileRecycleBinBtn hisbtn' title='回收站' style='padding: 5px 5px 0;position: relative;display:none'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M14 3a.7.7 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.7.7 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2M3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5s-3.69-.311-4.785-.793'/>&nbsp;</svg><span class='trashcount'></span></button></td></tr>
+        <tr class='histr'><td colspan='5' style='text-align:center'><div style='position: relative;margin-bottom: 5px;'><input class='historySearchInput' placeholder='搜索记录' /><span id='historySearchCount' style='display:none;position: absolute;top:5px;right:-10px;color: #00ceff'><b></b><span class='hkeyclearbtn' style='padding: 3px 8px; color: #eee; border: 1px solid #575757; border-radius: 3px;cursor: pointer;'>x</span></span></div></td></tr>
+        <tr class='histypetr' style='display:none'><td colspan='5' style='padding:0;'><div style='position: relative;margin-bottom: 5px;'><button class='topTypeBtn hisbtn' title='返回' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5'/></svg></button>&nbsp;/&nbsp;<span id='foldername' style='color: #ffbf00;font-size: 1.3em;vertical-align: middle;'></span></div></td></tr>
+        <tr class='hispagetr' style='display:none'><td colspan='8' style='padding:0 0 5px;'><button class='firstHisBtn hisbtn' title='第一页' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/><path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg></button>&nbsp;<button class='prevHisBtn hisbtn' title='上一页' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0'/></svg></button>&nbsp;<button class='pageinfoHisBtn hisbtn' style='height: 27px;font-size: 0.9em;padding-bottom:1px;color:#818181;cursor:default'></button>&nbsp;<button class='nextHisBtn hisbtn' title='下一页' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708'/></svg></button>&nbsp;<button class='lastHisBtn hisbtn' title='最后一页' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/><path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/></svg></button></td></tr>
+    </table>
+    <div class='booksdiv'><table id='bookstable2' class='historytable'></table></div>
+
+</script>
+<script id="hisHelpTemplate" type="text/template">
+    <div style='padding:10px 10px'>1、所有文件均保存在浏览器的临时目录，清理缓存时会导致数据流失。
+        <br>2、某些浏览器存在根据临时目录占用容量来自动清除缓存的机制，导致文件莫名丢失。
+        <br>3、建议定期对文件进行打包导出。
+        <br>4、本地打开的文件，所有操作包括删除都是针对缓存，不会对原始文件造成任何影响。
+        <br>5、除了分享功能会将文件上传服务器，所有操作均在浏览器本地执行。
+        <br>6、上锁功能可以通过设置一个密码为当前浏览器的阅读记录上锁；当隐藏阅读记录后，重新再显示则需要输入密码。<span style='color:#ff6d6d'>请务必记住该密码，如果忘记，则只能通过清除缓存来重置，但同时会删除所有阅读记录。</font>
+    </div>
+</script>
+<script id="importZipTemplate" type="text/template">
+    <div style="margin:0px 20px 0px 0px;">
+        <table><tbody>
+            <tr class='zipheadtr'><td colspan='3' style='text-align:left;'><button class='zipReselectBtn hisbtn' title='重新选择ZIP文件' style='height: 27px;font-size: 0.9em;padding-bottom:1px'>重新选择</button></td><td colspan='2' style='text-align:right;padding-right:0;min-width2:102px;'><button class='zipSortBtn hisbtn' title='排序字段' style='height: 27px;font-size: 0.9em;padding-bottom:1px'>文件名称</button>&nbsp;<button class='zipSortUpDownBtn hisbtn' title='降序' style='padding: 5px 5px 0;'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'><path d='M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z'/>&nbsp;</svg></button></td></tr>
+            <tr class='zipheadtr'><td colspan='5' style='text-align:center'><div style='position: relative;margin-bottom: 5px;'><input class='zipSearchInput' placeholder='搜索文件' /><span id='zipSearchCount' style='display:none;position: absolute;top:5px;right:-10px;color: #00ceff'><b></b></span></div></td></tr>
+        </tbody></table>
+    </div> 
+    <div id="importZipDiv"><table><tbody></tbody></table></div>
+</script>
+<script id="ziphsortdivTemplate" type="text/template">
+    <div class='ziphsortdiv' style='text-align:center;padding-top:10px;padding-bottom: 5px;'><div style='color: #31bf85;'><b>排序字段</b></div><p svalue='1'>文件名称</p><p svalue='2'>修改时间</p><p svalue='3'>文件大小</p><p svalue='4'>是否存在</p><p svalue='5'>文件类型</p></div>
+</script>
+<script id="putToTypeTemplate" type="text/template">
+    <div style="margin:10px;font-weight:bold;color: #8d8d8d;">点击将选择的 {0} 条记录移入分类中</div>
+    <div id="putToTypeDiv" style="margin:10px;">
+        <center>加载中……</center>
+    </div>
+</script>
+<script id="exportfileTemplate" type="text/template">
+    <div class='exportfilediv' style='padding:10px 0 5px 0;'>
+        <div style='color: #31bf85;padding-left:10px;'><b>导出类型</b></div>
+        <p svalue='1' style='padding-left:5px'>TXT ：纯文本文件</p>
+        <p svalue='2' style='padding-left:5px'>LITU：本阅读器专用</p>
+    </div>
+</script>
+<script id="exportlitufileTemplate" type="text/template">
+    <div class='exportfilelitudiv' style='padding:20px 0 5px 0;'>
+        <div style='color: #31bf85;padding-left:10px;margin-bottom:5px;text-align:center'><b>LITU 文件导出选项</b></div>
+        <p><input name="withconf" type="checkbox">&nbsp;<span link='withconf'>附加当前阅读样式</span></p>
+        <p><input name="banlocal" type="checkbox">&nbsp;<span link='banlocal'>禁止通过本地打开</span></p>
+        <p><input name="tohistory" type="checkbox">&nbsp;<span link='tohistory'>只生成到阅读记录</span></p>
+        <p style='padding:10px;'><button index=1 class='repbtn' style='width:96%'>确定</button></p>
+    </div>
+</script>
+<script id="hsortdivTemplate" type="text/template">
+    <div class='hsortdiv' style='text-align:center;padding-top:10px;padding-bottom: 5px;'><div style='color: #31bf85;'><b>排序字段</b></div><p svalue='1'>打开时间</p><p svalue='2'>文件名称</p><p svalue='3'>文件大小</p><p svalue='4'>文本字数</p><p svalue='6'>打开次数</p><p svalue='5'>添加时间</p><p svalue='7'>阅读进度</p><p svalue='8'>记录类型</p></div>
+</script>
+<script id="bdetailTemplate" type="text/template">
+    <table id="bdetailtable" style="padding: 10px"><tbody><tr><th>显示名称</th><td>{0}</td></tr><tr class='sfname'><th>原始名称</th><td>{1}</td></tr><tr><th>文件大小</th><td>{2}</td></tr><tr><th>文本字数</th><td>{3}</td></tr><tr><th>解析编码</th><td>{4}</td></tr><tr><th>最近打开</th><td>{6}</td></tr><tr><th>添加时间</th><td>{5}&nbsp;&nbsp;&nbsp;&nbsp;修改时间&nbsp;&nbsp;{7}</td></tr><tr><th>打开次数</th><td>{8}</td></tr><tr><th>阅读进度</th><td>{9}</td></tr><tr><th>文件来源</th><td>{10}</td></tr><tr id='sbrowser' style='display:none'><th>源客户端</th><td>{11}</td></tr></tbody></table>
+</script>
+<script id="replaceTemplate" type="text/template">
+    <div style="margin:10px;">
+        <input name="rmodel" type="radio" checked="checked" value="2"> 编辑&nbsp;&nbsp;<input name="rmodel" type="radio" value="1"> 列表
+        &nbsp;<button id="rthispageban" class='repbtn'>本页原文</button>&nbsp;<button id="rhelp" class='repbtn'>帮助</button>&nbsp;<button class='reptopbtn repbtn' style='display:none'>顶</button>
+    </div>
+    <div style="margin:10px;">
+        <input name="fjmodel" type="radio" checked="checked" value="1"> 原始&nbsp;&nbsp;<input name="fjmodel" type="radio" value="2"> 简体&nbsp;&nbsp;<input name="fjmodel" type="radio" value="3"> 繁体
+    </div>
+    <div style="margin:10px;">
+        <button i="1" class='repbtn reptab'>本书<span style='display:none'>√</span></button>
+        <button i="2" class='repbtn reptab'>全局<span style='display:none'>√</span></button>
+        <!--<button i="3" class='repbtn reptab'>前置<span style='display:none'>√</span></button>
+        <button i="4" class='repbtn reptab'>后置<span style='display:none'>√</span></button>
+        <button i="5" class='repbtn reptab'>扩展<span style='display:none'>√</span></button>-->&nbsp;&nbsp;&#8592;&nbsp;&nbsp;
+        <button i="6" class='repbtn reptab' style='color:#ff2d2d'>开关</button>
+        <button i="7" class='repbtn reptab' style='color:#ff2d2d;display:none'>追加</button>
+    </div>
+    <hr style="border: 1px solid #3d3c3c">
+    <div class="rodiv rmodel" style="display:none">
+        <div style="margin:0 10px 10px 10px"><input id="rkfilter" type="text" placeholder="过滤"></div>
+        <div>
+            <table id="rotable" style="margin-top: -10px"><thead><tr><th>原词<span id="rcount"></span></th><th>替词</th><th style='width:95px;text-align:center;padding: 5px 0;'>操作</th></tr></thead><tbody></tbody></table>
+        </div>
+    </div>
+    <div class="rsdiv rmodel">
+        <textarea id="rstextarea" style="width:450px;height:236px;margin:0 10px;padding:5px;border: 1px solid #373737;background: #2b2a2a;color: #a7a7a7;"></textarea>
+    </div>
+    <div class="rpopts" style="text-align:center;margin-top:5px;">
+        <button i='1' class='repbtn'>保存</button><button i='6' class='repbtn'>新增</button><button i='2' class='repbtn'>导出</button><button i='3' class='repbtn'>导入</button><button i='4' class='repbtn'>还原</button><button i='5' class='repbtn'>禁用</button>
+    </div>
+</script>
+<script id="appendReplaceTemplate" type="text/template">
+    <div style="margin:10px 10px 5px;color: #8d8d8d;" class='thisfilename'></div>
+    <div style="margin:10px 10px 5px;"><input class='appendReplaceSearchInput' style='width: 98%;' placeholder='搜索' /></div>
+    <hr style='margin-left:10px;margin-bottom: -5px;border:1px solid #3d3d3dbf;width: 96%;'>
+    <div id="appendRepDiv" style="margin:10px;">
+        <center>加载中……</center>
+    </div>
+</script>
+<script id="trashTemplate" type="text/template">
+    <div id="trashDiv">
+        <center>加载中……</center>
+    </div>
+</script>
+<script id="fileMergeTemplate" type="text/template">
+    <div style="margin:10px 10px 5px;color: #8d8d8d;">合并顺序：后一本附加到前一本尾部</div>
+    <hr style='margin-left:10px;margin-bottom: -5px;border:1px solid #3d3d3dbf;width: 96%;'>
+    <div style="margin:10px 10px 5px;"><input class="minputfilename" type="checkbox" style="vertical-align: text-bottom;margin-bottom: 1px;"><span class='tlabel'>插入文件名（如 第 N 部 文件名）</span></div>
+    <div id="fileMergeDiv">
+        <table><tbody><tr><td colspan="4" class="bincount" style="color:#7d7b7b;font-size:12px">{0} 条记录, 总大小 {1}</td></tr>{2}</tbody></table>
+    </div>
+</script>
+<script id="fileMergeChaptersTemplate" type="text/template">
+    <div style="margin:10px 10px 5px;color: #8d8d8d;">选择需要合并的章节，一个不选则全部合并</div>
+    <hr style='margin-left:10px;margin-bottom: -5px;border:1px solid #3d3d3dbf;width: 96%;'>
+    <div id="fileMergeChaptersDiv">
+        <table><tbody><tr><td colspan="4" class="bincount" style="color:#7d7b7b;font-size:12px">已选 {0} 个 / 共 {1} 个章节</td></tr>{2}</tbody></table>
+    </div>
+</script>
+<script id="shareTemplate" type="text/template">
+    <div style="margin:10px;font-weight:bold;color: #8d8d8d;">分享需要将文件临时上传至服务器，10 分钟后自动删除，确定分享吗？</div>
+    <div style="margin:10px;">
+        分享名称：<br><input id="sharename" type="text" class="darkinput" style="padding:0 5px;font-size:16px;line-height:31px;width:95%;border-radius: 5px;" />
+    </div>
+    <div style="margin:10px;">
+        下载次数：<br><input id="sharelimit" type="text" class="darkinput" placeholder="留空或者0为不限制" style="padding:0 5px;font-size:16px;line-height:31px;width:95%;border-radius: 5px;" />
+    </div>
+    <div style="margin:10px;">
+        二次分享：<input name="shareagain" type="radio" value="1" checked/> 允许&nbsp;&nbsp;<input name="shareagain" type="radio" value="2" /> 禁止
+    </div>
+    <div style="margin:10px 10px 0 10px;font-weight:bold;color: #8d8d8d;">10分钟后或者到达下载次数则分享失效。<br>禁止二次分享则下载者无法导出和再次分享。</div>
+</script>
+<script id="replacehelpTemplate" type="text/template">
+    <div style="margin:10px;">
+    <p>1、替换规则为一行一组，每组由英文空格隔开，前者为原词，后者为替词。</p>
+    <p>2、每行以//开头则忽略该组规则。</p>
+    <p>3、替换是按照顺序来的，上一行的替换影响下一行的替换效果。</p>
+    <p>4、列表模式下可以搜索规则，删除单个规则或者禁用、启用单个规则，双击则可以修改规则。</p>
+    <p>5、编辑模式下可以直接编辑规则。</p>
+    <p>6、底部的禁用/启用按钮可以全局关闭或启用替换功能。</p>
+    <p>7、可以将文本转为繁体或者简体，优先级大于自定义替换。</p>
+    <p>8、替换词 [空格] 表示空格，替换词 [空] 表示空字符，[换行] 表示换行符。</p>
+    <p>9、点击 本页原文 按钮则当前页不使用替换规则，切换页码后重新使用替换规则。</p>
+    </div>
+</script>
+<script id="replaceAddTemplate" type="text/template">
+    <div style="text-align:center;">
+        <div style="margin:10px;position: relative;">
+            <input class="rainput" name="newword" type="text" placeholder="原词">
+            <button class="repbtn setspacebtn" style='position: absolute;top:3px;right:1px;'>空格</button>
+        </div>
+        <div style="margin:10px;position: relative;">
+            <input class="rainput" name="newrword" type="text" placeholder="替词">
+            <button class="repbtn setblankbtn" style='position: absolute;top:3px;right:50px;'> 空 </button>
+            <button class="repbtn setwrapbtn" style='position: absolute;top:3px;right:1px;'>换行</button>
+        </div>
+        <div class="rpnopts" style="text-align:center;margin-top:5px;">
+            <!-- <button i='2'>[空]</button> -->
+            <button i='1' class='repbtn'>确定</button>
+        </div>
+    </div>
+</script>
+<script id="txtconfTemplate" type="text/template">
+    <div id="txtconfDiv"><table><tbody></tbody></table></div>
+</script>
+<script id="fontFamilyTemplate" type="text/template">
+    <div class="child-mod2" style="padding-left: 20px;line-height: 30px;">
+        <button id="settingsaveasbtn" class="ftbtn tconfbtn">保存</button><button id="settinglistbtn" class="ftbtn tconfbtn" style="position: relative;display:none">列表<span style="position: absolute; top: -6px; left: 0; font-size: .9em; color: #4fe3b3; font-weight: bold;width: 100%; padding: 0;"></span></button><button id="settingexportbtn" class="ftbtn tconfbtn">导出</button><button id="settingimportbtn" class="ftbtn tconfbtn">导入</button><button id="settingbackbtn" class="ftbtn tconfbtn" style="display:none;background: #cb3131;">还原</button>
+    </div>
+    <hr style="border: 1px solid #1e1e1e;">
+    <div class="child-mod2">
+        <span>字体</span>
+        <div class="fmbk-container fm-1" style="text-decoration:underline">
+            默认
+        </div>
+        <div class="fmbk-container fm-2">
+            宋体
+        </div>
+        <div class="fmbk-container fm-3">
+            仿宋
+        </div>
+        <div class="fmbk-container fm-4">
+            黑体
+        </div>
+        <div class="fmbk-container fm-5">
+            楷体
+        </div>
+        <div class="fmbk-container fm-6">
+            隶书
+        </div>
+        <div class="fmbk-container fm-7">
+            幼圆
+        </div>
+        <div class="fmbk-container fm-8 zidingyifont" style="width:45px;">
+            自定义
+        </div>
+        <input style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" id="zidingyifile" type="file" accept = ".otf,.ttf" onchange="installFontFile();" />
+    </div>
+</script>
+<script type="text/javascript"> 
+window.bookpath = 'M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783';
+window.zh_s = '万与丑专业丛东丝丢两严丧个丬丰临为丽举么义乌乐乔习乡书买乱争于亏云亘亚产亩亲亵亸亿仅从仑仓仪们价众优伙会伛伞伟传伤伥伦伧伪伫体余佣佥侠侣侥侦侧侨侩侪侬俣俦俨俩俪俭债倾偬偻偾偿傥傧储傩儿兑兖党兰关兴兹养兽冁内冈册写军农冢冯冲决况冻净凄凉凌减凑凛几凤凫凭凯击凼凿刍划刘则刚创删别刬刭刽刿剀剂剐剑剥剧劝办务劢动励劲劳势勋勐勚匀匦匮区医华协单卖卢卤卧卫却卺厂厅历厉压厌厍厕厢厣厦厨厩厮县参叆叇双发变叙叠叶号叹叽吁后吓吕吗吣吨听启吴呒呓呕呖呗员呙呛呜咏咔咙咛咝咤咴咸哌响哑哒哓哔哕哗哙哜哝哟唛唝唠唡唢唣唤啧啬啭啮啰啴啸喷喽喾嗫呵嗳嘘嘤嘱噜噼嚣嚯团园囱围囵国图圆圣圹场坂坏块坚坛坜坝坞坟坠垄垅垆垒垦垧垩垫垭垯垱垲垴埘埙埚埝埯堑堕塆墙壮声壳壶壸处备复够头夸夹夺奁奂奋奖奥妆妇妈妩妪妫姗姜娄娅娆娇娈娱娲娴婳婴婵婶媪嫒嫔嫱嬷孙学孪宁宝实宠审宪宫宽宾寝对寻导寿将尔尘尧尴尸尽层屃屉届属屡屦屿岁岂岖岗岘岙岚岛岭岳岽岿峃峄峡峣峤峥峦崂崃崄崭嵘嵚嵛嵝嵴巅巩巯币帅师帏帐帘帜带帧帮帱帻帼幂幞干并广庄庆庐庑库应庙庞废庼廪开异弃张弥弪弯弹强归当录彟彦彻径徕御忆忏忧忾怀态怂怃怄怅怆怜总怼怿恋恳恶恸恹恺恻恼恽悦悫悬悭悯惊惧惨惩惫惬惭惮惯愍愠愤愦愿慑慭憷懑懒懔戆戋戏戗战戬户扎扑扦执扩扪扫扬扰抚抛抟抠抡抢护报担拟拢拣拥拦拧拨择挂挚挛挜挝挞挟挠挡挢挣挤挥挦捞损捡换捣据捻掳掴掷掸掺掼揸揽揿搀搁搂搅携摄摅摆摇摈摊撄撑撵撷撸撺擞攒敌敛数斋斓斗斩断无旧时旷旸昙昼昽显晋晒晓晔晕晖暂暧札术朴机杀杂权条来杨杩杰极构枞枢枣枥枧枨枪枫枭柜柠柽栀栅标栈栉栊栋栌栎栏树栖样栾桊桠桡桢档桤桥桦桧桨桩梦梼梾检棂椁椟椠椤椭楼榄榇榈榉槚槛槟槠横樯樱橥橱橹橼檐檩欢欤欧歼殁殇残殒殓殚殡殴毁毂毕毙毡毵氇气氢氩氲汇汉污汤汹沓沟没沣沤沥沦沧沨沩沪沵泞泪泶泷泸泺泻泼泽泾洁洒洼浃浅浆浇浈浉浊测浍济浏浐浑浒浓浔浕涂涌涛涝涞涟涠涡涢涣涤润涧涨涩淀渊渌渍渎渐渑渔渖渗温游湾湿溃溅溆溇滗滚滞滟滠满滢滤滥滦滨滩滪漤潆潇潋潍潜潴澜濑濒灏灭灯灵灾灿炀炉炖炜炝点炼炽烁烂烃烛烟烦烧烨烩烫烬热焕焖焘煅煳熘爱爷牍牦牵牺犊犟状犷犸犹狈狍狝狞独狭狮狯狰狱狲猃猎猕猡猪猫猬献獭玑玙玚玛玮环现玱玺珉珏珐珑珰珲琎琏琐琼瑶瑷璇璎瓒瓮瓯电画畅畲畴疖疗疟疠疡疬疮疯疱疴痈痉痒痖痨痪痫痴瘅瘆瘗瘘瘪瘫瘾瘿癞癣癫癯皑皱皲盏盐监盖盗盘眍眦眬着睁睐睑瞒瞩矫矶矾矿砀码砖砗砚砜砺砻砾础硁硅硕硖硗硙硚确硷碍碛碜碱碹磙礼祎祢祯祷祸禀禄禅离秃秆种积称秽秾稆税稣稳穑穷窃窍窑窜窝窥窦窭竖竞笃笋笔笕笺笼笾筑筚筛筜筝筹签简箓箦箧箨箩箪箫篑篓篮篱簖籁籴类籼粜粝粤粪粮糁糇紧絷纟纠纡红纣纤纥约级纨纩纪纫纬纭纮纯纰纱纲纳纴纵纶纷纸纹纺纻纼纽纾线绀绁绂练组绅细织终绉绊绋绌绍绎经绐绑绒结绔绕绖绗绘给绚绛络绝绞统绠绡绢绣绤绥绦继绨绩绪绫绬续绮绯绰绱绲绳维绵绶绷绸绹绺绻综绽绾绿缀缁缂缃缄缅缆缇缈缉缊缋缌缍缎缏缐缑缒缓缔缕编缗缘缙缚缛缜缝缞缟缠缡缢缣缤缥缦缧缨缩缪缫缬缭缮缯缰缱缲缳缴缵罂网罗罚罢罴羁羟羡翘翙翚耢耧耸耻聂聋职聍联聩聪肃肠肤肷肾肿胀胁胆胜胧胨胪胫胶脉脍脏脐脑脓脔脚脱脶脸腊腌腘腭腻腼腽腾膑臜舆舣舰舱舻艰艳艹艺节芈芗芜芦苁苇苈苋苌苍苎苏苘苹茎茏茑茔茕茧荆荐荙荚荛荜荞荟荠荡荣荤荥荦荧荨荩荪荫荬荭荮药莅莜莱莲莳莴莶获莸莹莺莼萚萝萤营萦萧萨葱蒇蒉蒋蒌蓝蓟蓠蓣蓥蓦蔷蔹蔺蔼蕲蕴薮藁藓虏虑虚虫虬虮虽虾虿蚀蚁蚂蚕蚝蚬蛊蛎蛏蛮蛰蛱蛲蛳蛴蜕蜗蜡蝇蝈蝉蝎蝼蝾螀螨蟏衅衔补衬衮袄袅袆袜袭袯装裆裈裢裣裤裥褛褴襁襕见观觃规觅视觇览觉觊觋觌觍觎觏觐觑觞触觯詟誉誊讠计订讣认讥讦讧讨让讪讫训议讯记讱讲讳讴讵讶讷许讹论讻讼讽设访诀证诂诃评诅识诇诈诉诊诋诌词诎诏诐译诒诓诔试诖诗诘诙诚诛诜话诞诟诠诡询诣诤该详诧诨诩诪诫诬语诮误诰诱诲诳说诵诶请诸诹诺读诼诽课诿谀谁谂调谄谅谆谇谈谊谋谌谍谎谏谐谑谒谓谔谕谖谗谘谙谚谛谜谝谞谟谠谡谢谣谤谥谦谧谨谩谪谫谬谭谮谯谰谱谲谳谴谵谶谷豮贝贞负贠贡财责贤败账货质贩贪贫贬购贮贯贰贱贲贳贴贵贶贷贸费贺贻贼贽贾贿赀赁赂赃资赅赆赇赈赉赊赋赌赍赎赏赐赑赒赓赔赕赖赗赘赙赚赛赜赝赞赟赠赡赢赣赪赵赶趋趱趸跃跄跖跞践跶跷跸跹跻踊踌踪踬踯蹑蹒蹰蹿躏躜躯车轧轨轩轪轫转轭轮软轰轱轲轳轴轵轶轷轸轹轺轻轼载轾轿辀辁辂较辄辅辆辇辈辉辊辋辌辍辎辏辐辑辒输辔辕辖辗辘辙辚辞辩辫边辽达迁过迈运还这进远违连迟迩迳迹适选逊递逦逻遗遥邓邝邬邮邹邺邻郁郄郏郐郑郓郦郧郸酝酦酱酽酾酿释里鉅鉴銮錾钆钇针钉钊钋钌钍钎钏钐钑钒钓钔钕钖钗钘钙钚钛钝钞钟钠钡钢钣钤钥钦钧钨钩钪钫钬钭钮钯钰钱钲钳钴钵钶钷钸钹钺钻钼钽钾钿铀铁铂铃铄铅铆铈铉铊铋铍铎铏铐铑铒铕铗铘铙铚铛铜铝铞铟铠铡铢铣铤铥铦铧铨铪铫铬铭铮铯铰铱铲铳铴铵银铷铸铹铺铻铼铽链铿销锁锂锃锄锅锆锇锈锉锊锋锌锍锎锏锐锑锒锓锔锕锖锗错锚锜锞锟锠锡锢锣锤锥锦锨锩锫锬锭键锯锰锱锲锳锴锵锶锷锸锹锺锻锼锽锾锿镀镁镂镃镆镇镈镉镊镌镍镎镏镐镑镒镕镖镗镙镚镛镜镝镞镟镠镡镢镣镤镥镦镧镨镩镪镫镬镭镮镯镰镱镲镳镴镶长门闩闪闫闬闭问闯闰闱闲闳间闵闶闷闸闹闺闻闼闽闾闿阀阁阂阃阄阅阆阇阈阉阊阋阌阍阎阏阐阑阒阓阔阕阖阗阘阙阚阛队阳阴阵阶际陆陇陈陉陕陧陨险随隐隶隽难雏雠雳雾霁霉霭靓静靥鞑鞒鞯鞴韦韧韨韩韪韫韬韵页顶顷顸项顺须顼顽顾顿颀颁颂颃预颅领颇颈颉颊颋颌颍颎颏颐频颒颓颔颕颖颗题颙颚颛颜额颞颟颠颡颢颣颤颥颦颧风飏飐飑飒飓飔飕飖飗飘飙飚飞飨餍饤饥饦饧饨饩饪饫饬饭饮饯饰饱饲饳饴饵饶饷饸饹饺饻饼饽饾饿馀馁馂馃馄馅馆馇馈馉馊馋馌馍馎馏馐馑馒馓馔馕马驭驮驯驰驱驲驳驴驵驶驷驸驹驺驻驼驽驾驿骀骁骂骃骄骅骆骇骈骉骊骋验骍骎骏骐骑骒骓骔骕骖骗骘骙骚骛骜骝骞骟骠骡骢骣骤骥骦骧髅髋髌鬓魇魉鱼鱽鱾鱿鲀鲁鲂鲄鲅鲆鲇鲈鲉鲊鲋鲌鲍鲎鲏鲐鲑鲒鲓鲔鲕鲖鲗鲘鲙鲚鲛鲜鲝鲞鲟鲠鲡鲢鲣鲤鲥鲦鲧鲨鲩鲪鲫鲬鲭鲮鲯鲰鲱鲲鲳鲴鲵鲶鲷鲸鲹鲺鲻鲼鲽鲾鲿鳀鳁鳂鳃鳄鳅鳆鳇鳈鳉鳊鳋鳌鳍鳎鳏鳐鳑鳒鳓鳔鳕鳖鳗鳘鳙鳛鳜鳝鳞鳟鳠鳡鳢鳣鸟鸠鸡鸢鸣鸤鸥鸦鸧鸨鸩鸪鸫鸬鸭鸮鸯鸰鸱鸲鸳鸴鸵鸶鸷鸸鸹鸺鸻鸼鸽鸾鸿鹀鹁鹂鹃鹄鹅鹆鹇鹈鹉鹊鹋鹌鹍鹎鹏鹐鹑鹒鹓鹔鹕鹖鹗鹘鹚鹛鹜鹝鹞鹟鹠鹡鹢鹣鹤鹥鹦鹧鹨鹩鹪鹫鹬鹭鹯鹰鹱鹲鹳鹴鹾麦麸黄黉黡黩黪黾鼋鼌鼍鼗鼹齄齐齑齿龀龁龂龃龄龅龆龇龈龉龊龋龌龙龚龛龟志制咨只里系范松没尝尝闹面准钟别闲干尽脏';
+window.zh_t = '萬與醜專業叢東絲丟兩嚴喪個爿豐臨為麗舉麼義烏樂喬習鄉書買亂爭於虧雲亙亞產畝親褻嚲億僅從侖倉儀們價眾優夥會傴傘偉傳傷倀倫傖偽佇體餘傭僉俠侶僥偵側僑儈儕儂俁儔儼倆儷儉債傾傯僂僨償儻儐儲儺兒兌兗黨蘭關興茲養獸囅內岡冊寫軍農塚馮衝決況凍淨淒涼淩減湊凜幾鳳鳧憑凱擊氹鑿芻劃劉則剛創刪別剗剄劊劌剴劑剮劍剝劇勸辦務勱動勵勁勞勢勳猛勩勻匭匱區醫華協單賣盧鹵臥衛卻巹廠廳曆厲壓厭厙廁廂厴廈廚廄廝縣參靉靆雙發變敘疊葉號歎嘰籲後嚇呂嗎唚噸聽啟吳嘸囈嘔嚦唄員咼嗆嗚詠哢嚨嚀噝吒噅鹹呱響啞噠嘵嗶噦嘩噲嚌噥喲嘜嗊嘮啢嗩唕喚嘖嗇囀齧囉嘽嘯噴嘍嚳囁嗬噯噓嚶囑嚕劈囂謔團園囪圍圇國圖圓聖壙場阪壞塊堅壇壢壩塢墳墜壟壟壚壘墾坰堊墊埡墶壋塏堖塒塤堝墊垵塹墮壪牆壯聲殼壺壼處備複夠頭誇夾奪奩奐奮獎奧妝婦媽嫵嫗媯姍薑婁婭嬈嬌孌娛媧嫻嫿嬰嬋嬸媼嬡嬪嬙嬤孫學孿寧寶實寵審憲宮寬賓寢對尋導壽將爾塵堯尷屍盡層屭屜屆屬屢屨嶼歲豈嶇崗峴嶴嵐島嶺嶽崠巋嶨嶧峽嶢嶠崢巒嶗崍嶮嶄嶸嶔崳嶁脊巔鞏巰幣帥師幃帳簾幟帶幀幫幬幘幗冪襆幹並廣莊慶廬廡庫應廟龐廢廎廩開異棄張彌弳彎彈強歸當錄彠彥徹徑徠禦憶懺憂愾懷態慫憮慪悵愴憐總懟懌戀懇惡慟懨愷惻惱惲悅愨懸慳憫驚懼慘懲憊愜慚憚慣湣慍憤憒願懾憖怵懣懶懍戇戔戲戧戰戩戶紮撲扡執擴捫掃揚擾撫拋摶摳掄搶護報擔擬攏揀擁攔擰撥擇掛摯攣掗撾撻挾撓擋撟掙擠揮撏撈損撿換搗據撚擄摑擲撣摻摜摣攬撳攙擱摟攪攜攝攄擺搖擯攤攖撐攆擷擼攛擻攢敵斂數齋斕鬥斬斷無舊時曠暘曇晝曨顯晉曬曉曄暈暉暫曖劄術樸機殺雜權條來楊榪傑極構樅樞棗櫪梘棖槍楓梟櫃檸檉梔柵標棧櫛櫳棟櫨櫟欄樹棲樣欒棬椏橈楨檔榿橋樺檜槳樁夢檮棶檢欞槨櫝槧欏橢樓欖櫬櫚櫸檟檻檳櫧橫檣櫻櫫櫥櫓櫞簷檁歡歟歐殲歿殤殘殞殮殫殯毆毀轂畢斃氈毿氌氣氫氬氳彙漢汙湯洶遝溝沒灃漚瀝淪滄渢溈滬濔濘淚澩瀧瀘濼瀉潑澤涇潔灑窪浹淺漿澆湞溮濁測澮濟瀏滻渾滸濃潯濜塗湧濤澇淶漣潿渦溳渙滌潤澗漲澀澱淵淥漬瀆漸澠漁瀋滲溫遊灣濕潰濺漵漊潷滾滯灩灄滿瀅濾濫灤濱灘澦濫瀠瀟瀲濰潛瀦瀾瀨瀕灝滅燈靈災燦煬爐燉煒熗點煉熾爍爛烴燭煙煩燒燁燴燙燼熱煥燜燾煆糊溜愛爺牘犛牽犧犢強狀獷獁猶狽麅獮獰獨狹獅獪猙獄猻獫獵獼玀豬貓蝟獻獺璣璵瑒瑪瑋環現瑲璽瑉玨琺瓏璫琿璡璉瑣瓊瑤璦璿瓔瓚甕甌電畫暢佘疇癤療瘧癘瘍鬁瘡瘋皰屙癰痙癢瘂癆瘓癇癡癉瘮瘞瘺癟癱癮癭癩癬癲臒皚皺皸盞鹽監蓋盜盤瞘眥矓著睜睞瞼瞞矚矯磯礬礦碭碼磚硨硯碸礪礱礫礎硜矽碩硤磽磑礄確鹼礙磧磣堿镟滾禮禕禰禎禱禍稟祿禪離禿稈種積稱穢穠穭稅穌穩穡窮竊竅窯竄窩窺竇窶豎競篤筍筆筧箋籠籩築篳篩簹箏籌簽簡籙簀篋籜籮簞簫簣簍籃籬籪籟糴類秈糶糲粵糞糧糝餱緊縶糸糾紆紅紂纖紇約級紈纊紀紉緯紜紘純紕紗綱納紝縱綸紛紙紋紡紵紖紐紓線紺絏紱練組紳細織終縐絆紼絀紹繹經紿綁絨結絝繞絰絎繪給絢絳絡絕絞統綆綃絹繡綌綏絛繼綈績緒綾緓續綺緋綽緔緄繩維綿綬繃綢綯綹綣綜綻綰綠綴緇緙緗緘緬纜緹緲緝縕繢緦綞緞緶線緱縋緩締縷編緡緣縉縛縟縝縫縗縞纏縭縊縑繽縹縵縲纓縮繆繅纈繚繕繒韁繾繰繯繳纘罌網羅罰罷羆羈羥羨翹翽翬耮耬聳恥聶聾職聹聯聵聰肅腸膚膁腎腫脹脅膽勝朧腖臚脛膠脈膾髒臍腦膿臠腳脫腡臉臘醃膕齶膩靦膃騰臏臢輿艤艦艙艫艱豔艸藝節羋薌蕪蘆蓯葦藶莧萇蒼苧蘇檾蘋莖蘢蔦塋煢繭荊薦薘莢蕘蓽蕎薈薺蕩榮葷滎犖熒蕁藎蓀蔭蕒葒葤藥蒞蓧萊蓮蒔萵薟獲蕕瑩鶯蓴蘀蘿螢營縈蕭薩蔥蕆蕢蔣蔞藍薊蘺蕷鎣驀薔蘞藺藹蘄蘊藪槁蘚虜慮虛蟲虯蟣雖蝦蠆蝕蟻螞蠶蠔蜆蠱蠣蟶蠻蟄蛺蟯螄蠐蛻蝸蠟蠅蟈蟬蠍螻蠑螿蟎蠨釁銜補襯袞襖嫋褘襪襲襏裝襠褌褳襝褲襇褸襤繈襴見觀覎規覓視覘覽覺覬覡覿覥覦覯覲覷觴觸觶讋譽謄訁計訂訃認譏訐訌討讓訕訖訓議訊記訒講諱謳詎訝訥許訛論訩訟諷設訪訣證詁訶評詛識詗詐訴診詆謅詞詘詔詖譯詒誆誄試詿詩詰詼誠誅詵話誕詬詮詭詢詣諍該詳詫諢詡譸誡誣語誚誤誥誘誨誑說誦誒請諸諏諾讀諑誹課諉諛誰諗調諂諒諄誶談誼謀諶諜謊諫諧謔謁謂諤諭諼讒諮諳諺諦謎諞諝謨讜謖謝謠謗諡謙謐謹謾謫譾謬譚譖譙讕譜譎讞譴譫讖穀豶貝貞負貟貢財責賢敗賬貨質販貪貧貶購貯貫貳賤賁貰貼貴貺貸貿費賀貽賊贄賈賄貲賃賂贓資賅贐賕賑賚賒賦賭齎贖賞賜贔賙賡賠賧賴賵贅賻賺賽賾贗讚贇贈贍贏贛赬趙趕趨趲躉躍蹌蹠躒踐躂蹺蹕躚躋踴躊蹤躓躑躡蹣躕躥躪躦軀車軋軌軒軑軔轉軛輪軟轟軲軻轤軸軹軼軤軫轢軺輕軾載輊轎輈輇輅較輒輔輛輦輩輝輥輞輬輟輜輳輻輯轀輸轡轅轄輾轆轍轔辭辯辮邊遼達遷過邁運還這進遠違連遲邇逕跡適選遜遞邐邏遺遙鄧鄺鄔郵鄒鄴鄰鬱郤郟鄶鄭鄆酈鄖鄲醞醱醬釅釃釀釋裏钜鑒鑾鏨釓釔針釘釗釙釕釷釺釧釤鈒釩釣鍆釹鍚釵鈃鈣鈈鈦鈍鈔鍾鈉鋇鋼鈑鈐鑰欽鈞鎢鉤鈧鈁鈥鈄鈕鈀鈺錢鉦鉗鈷缽鈳鉕鈽鈸鉞鑽鉬鉭鉀鈿鈾鐵鉑鈴鑠鉛鉚鈰鉉鉈鉍鈹鐸鉶銬銠鉺銪鋏鋣鐃銍鐺銅鋁銱銦鎧鍘銖銑鋌銩銛鏵銓鉿銚鉻銘錚銫鉸銥鏟銃鐋銨銀銣鑄鐒鋪鋙錸鋱鏈鏗銷鎖鋰鋥鋤鍋鋯鋨鏽銼鋝鋒鋅鋶鐦鐧銳銻鋃鋟鋦錒錆鍺錯錨錡錁錕錩錫錮鑼錘錐錦鍁錈錇錟錠鍵鋸錳錙鍥鍈鍇鏘鍶鍔鍤鍬鍾鍛鎪鍠鍰鎄鍍鎂鏤鎡鏌鎮鎛鎘鑷鐫鎳鎿鎦鎬鎊鎰鎔鏢鏜鏍鏰鏞鏡鏑鏃鏇鏐鐔钁鐐鏷鑥鐓鑭鐠鑹鏹鐙鑊鐳鐶鐲鐮鐿鑔鑣鑞鑲長門閂閃閆閈閉問闖閏闈閑閎間閔閌悶閘鬧閨聞闥閩閭闓閥閣閡閫鬮閱閬闍閾閹閶鬩閿閽閻閼闡闌闃闠闊闋闔闐闒闕闞闤隊陽陰陣階際陸隴陳陘陝隉隕險隨隱隸雋難雛讎靂霧霽黴靄靚靜靨韃鞽韉韝韋韌韍韓韙韞韜韻頁頂頃頇項順須頊頑顧頓頎頒頌頏預顱領頗頸頡頰頲頜潁熲頦頤頻頮頹頷頴穎顆題顒顎顓顏額顳顢顛顙顥纇顫顬顰顴風颺颭颮颯颶颸颼颻飀飄飆飆飛饗饜飣饑飥餳飩餼飪飫飭飯飲餞飾飽飼飿飴餌饒餉餄餎餃餏餅餑餖餓餘餒餕餜餛餡館餷饋餶餿饞饁饃餺餾饈饉饅饊饌饢馬馭馱馴馳驅馹駁驢駔駛駟駙駒騶駐駝駑駕驛駘驍罵駰驕驊駱駭駢驫驪騁驗騂駸駿騏騎騍騅騌驌驂騙騭騤騷騖驁騮騫騸驃騾驄驏驟驥驦驤髏髖髕鬢魘魎魚魛魢魷魨魯魴魺鮁鮃鯰鱸鮋鮓鮒鮊鮑鱟鮍鮐鮭鮚鮳鮪鮞鮦鰂鮜鱠鱭鮫鮮鮺鯗鱘鯁鱺鰱鰹鯉鰣鰷鯀鯊鯇鮶鯽鯒鯖鯪鯕鯫鯡鯤鯧鯝鯢鯰鯛鯨鯵鯴鯔鱝鰈鰏鱨鯷鰮鰃鰓鱷鰍鰒鰉鰁鱂鯿鰠鼇鰭鰨鰥鰩鰟鰜鰳鰾鱈鱉鰻鰵鱅鰼鱖鱔鱗鱒鱯鱤鱧鱣鳥鳩雞鳶鳴鳲鷗鴉鶬鴇鴆鴣鶇鸕鴨鴞鴦鴒鴟鴝鴛鴬鴕鷥鷙鴯鴰鵂鴴鵃鴿鸞鴻鵐鵓鸝鵑鵠鵝鵒鷳鵜鵡鵲鶓鵪鶤鵯鵬鵮鶉鶊鵷鷫鶘鶡鶚鶻鶿鶥鶩鷊鷂鶲鶹鶺鷁鶼鶴鷖鸚鷓鷚鷯鷦鷲鷸鷺鸇鷹鸌鸏鸛鸘鹺麥麩黃黌黶黷黲黽黿鼂鼉鞀鼴齇齊齏齒齔齕齗齟齡齙齠齜齦齬齪齲齷龍龔龕龜誌製谘隻裡係範鬆冇嚐嘗鬨麵準鐘彆閒乾儘臟';
+</script>
