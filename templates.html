@@ -240,8 +240,8 @@
 </div>
 <input style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" id="replacefile" type="file" accept = "text/plain" onchange="importReplaceFile();" />
 <input type="file" id="zipfile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = "application/zip" />
-<input type="file" id="litufile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = ".litu" />
-<input type="file" id="conffile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = ".lituconf"  />
+<input type="file" id="luhuifile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = ".luhui" />
+<input type="file" id="conffile" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" accept = ".luhuiconf"  />
 <script id="talkingMatchConfTemplate" type="text/template">
     <div id="talkingMatchConfdiv" style="margin:5px 10px;">
         <p>选择用于识别对话的字符对</p>
@@ -256,7 +256,7 @@
         <button class="selectTxtbtn">打开 TXT  文件</button>
     </div>
     <div style="margin:10px;">
-        <button class="selectLitubtn">打开 LITU 文件</button>
+        <button class="selectluhuibtn">打开 luhui 文件</button>
     </div>
     <div style="margin:10px;">
         <button class="selectZipbtn">打开 ZIP  文件</button>
@@ -363,12 +363,12 @@
     <div class='exportfilediv' style='padding:10px 0 5px 0;'>
         <div style='color: #31bf85;padding-left:10px;'><b>导出类型</b></div>
         <p svalue='1' style='padding-left:5px'>TXT ：纯文本文件</p>
-        <p svalue='2' style='padding-left:5px'>LITU：本阅读器专用</p>
+        <p svalue='2' style='padding-left:5px'>luhui：本阅读器专用</p>
     </div>
 </script>
-<script id="exportlitufileTemplate" type="text/template">
-    <div class='exportfilelitudiv' style='padding:20px 0 5px 0;'>
-        <div style='color: #31bf85;padding-left:10px;margin-bottom:5px;text-align:center'><b>LITU 文件导出选项</b></div>
+<script id="exportluhuifileTemplate" type="text/template">
+    <div class='exportfileluhuidiv' style='padding:20px 0 5px 0;'>
+        <div style='color: #31bf85;padding-left:10px;margin-bottom:5px;text-align:center'><b>luhui 文件导出选项</b></div>
         <p><input name="withconf" type="checkbox">&nbsp;<span link='withconf'>附加当前阅读样式</span></p>
         <p><input name="banlocal" type="checkbox">&nbsp;<span link='banlocal'>禁止通过本地打开</span></p>
         <p><input name="tohistory" type="checkbox">&nbsp;<span link='tohistory'>只生成到阅读记录</span></p>

@@ -1,7 +1,7 @@
 
 <div class='apidiv' style="color:#fff;margin:10px 10px 20px">
 	<h2>接入鲁虺阅读器</h2>
-	<p>通过外部地址打开 TXT / LITU / ZIP 文件。</p>
+	<p>通过外部地址打开 TXT / luhui / ZIP 文件。</p>
 	<h3>前置条件</h3>
 	<p>1，该外部地址支持本阅读器的跨域请求。</p>
 	<p>2，该外部地址支持 https 协议。</p>
@@ -10,7 +10,7 @@
 	<table style="padding: 10px">
 		<tbody>
 			<tr><th>参数</th><th>说明</th></tr>
-			<tr><td>url</td><td>接入的外部地址，最终响应体应为 TXT / LITU / ZIP 文件之一</td></tr>
+			<tr><td>url</td><td>接入的外部地址，最终响应体应为 TXT / luhui / ZIP 文件之一</td></tr>
 			<tr><td>params</td><td>接入参数，格式为 JSON 字符串进行 base64 编码（含有中文则需先进行encodeURI编码）</td></tr>
 		</tbody>
 	</table>
@@ -43,7 +43,7 @@
 	<h3>文件名称与文件类型</h3>
 	<p>文件名称解析顺序：</p>
 	<ol><li>响应头 luhui 中的 filename </li><li>params 中的 filename </li><li>响应头 Content-Disposition 中的文件名 </li><li>url 地址最后一个 / 之后的字符串</li></ol>
-	<p>文件名称后缀决定文件类型，只包括 TXT / LITU / ZIP 三种，不区分大小写。</p>
+	<p>文件名称后缀决定文件类型，只包括 TXT / luhui / ZIP 三种，不区分大小写。</p>
 	<h3>ZIP 文件</h3>
 	<p>zip 文件加载完毕后，如果存在多个内部文件，则打开其中一个之后，再通过返回主页，点击 + 按钮打开 ZIP 文件则可以选择打开其他文件。</p>
 	<h3>Nginx 跨域处理（示例）</h3>
